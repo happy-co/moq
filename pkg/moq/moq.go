@@ -228,7 +228,11 @@ func (m *Mocker) packageQualifier(pkg *types.Package) string {
 	}
 	for i := 1; ; i++ {
 		if p, exists := m.imports[name]; exists && p != path {
-			name = fmt.Sprintf("%s%d", pkg.Name(), i)
+			if i == 1 {
+				name = pkg.Name()
+			} else {
+				name = fmt.Sprintf("%s%d", pkg.Name(), i)
+			}
 		} else {
 			break
 		}
